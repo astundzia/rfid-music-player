@@ -33,6 +33,11 @@ I still had the problem of "how do I display album art on the screen?", luckily 
 
 And just like that, I could scan a RFID card, and have the album play throughout my house.
 
+## Bill of materials
+TBA
+
+
+
 ## Install guide
 There is an assumption you are familiar with linux, java, node, etc. If you've never written a bash script, this guide is probably not for you.
 
@@ -78,5 +83,39 @@ sonos:
   setVolume: true
 ```
 
+## Print an enclosure
+I've included the stl's and the 123d design files I used to create the enclosure. I printed these on a Prusa mk3s in PLA. See the files under `3dmodels/`
+
+I also have included the card holders/trays that I designed.
+
+![image](https://user-images.githubusercontent.com/831457/131878003-2aec6eb1-3b4a-49df-aabb-e415d7c2e731.png)
+
+
 
 ## Using the application
+After you have everything up and running, you can connect to the application on the default port (http://your-raspi:8081). This will show an interface similar to:
+
+![image](https://user-images.githubusercontent.com/831457/131877450-5f689881-d110-4cc4-bb7c-eda084b83336.png)
+
+This is essentially the view of the data. As you add albums, this view will obviously change.
+
+### Creating labels
+I wanted to display album art on each card. I found some Avery labels template `Presta 94238`, 2" x 3-1/2" Rectangle Labels that seemed to mostly fit the RFID cards. Avery also has a free template editor that I used to actually design the labels (https://app.print.avery.com/)
+
+### Adding a card to the application
+In order to link a RFID card to an album, you must first scan the card. Doing so will create an audible beep from the RFID reader. At this point, a blank entry in the application should appear, like:
+
+![image](https://user-images.githubusercontent.com/831457/131878785-5a5d986b-9f34-4f0d-a6e4-5fed9a59687d.png)
+
+You can then hit "edit" on that record, and find the spotify album for this card. 
+
+![image](https://user-images.githubusercontent.com/831457/131878971-bed7861d-74fa-4682-883c-4270dd7cce1d.png)
+
+Hit save, and that card is ready to play!
+
+
+
+
+
+
+Thanks for reading!
