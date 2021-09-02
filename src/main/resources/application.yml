@@ -1,0 +1,23 @@
+server:
+  port : 8081
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/jukebox
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
+spotify:
+  clientId: na
+  clientSecret: na
+
+sonos:
+  mainSpeaker: Office
+  speakerGroup: Alex's PC, Bedroom, Half Bathroom, Kitchen, Living Room, Master Bathroom
+  volume: 25
+  setVolume: true

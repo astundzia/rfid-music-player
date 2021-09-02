@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>RFID Jukebox</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">RFID Jukebox</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 mt-5">
+            <form method="post" th:object="${card}">
+                <div class="form-group">
+                    <label for="album"><h3>Album Search</h3></label>
+                    <select id="album" class="form-control select2-single">
+                        <option value="">Search for album...</option>
+                    </select>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="spotifyArtist">Artist</label>
+                    <input type="text" class="form-control" id="spotifyArtist" name="spotifyArtist" th:value="*{spotifyArtist}">
+                </div>
+                <div class="form-group">
+                    <label for="spotifyAlbum">Album</label>
+                    <input type="text" class="form-control" id="spotifyAlbum" name="spotifyAlbum" th:value="*{spotifyAlbum}">
+                </div>
+                <div class="form-group">
+                    <label for="spotifyUri">Spotify URI</label>
+                    <input type="text" class="form-control" id="spotifyUri" name="spotifyUri" th:value="*{spotifyUri}">
+                </div>
+                <div class="form-group">
+                    <label for="cardUuid">Card UUID</label>
+                    <input type="text" class="form-control" id="cardUuid" name="cardUuid" th:value="*{cardUuid}" readonly>
+                </div>
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+            <hr />
+            <form method="post" action="/delete" th:object="${card}">
+                <input type="hidden" class="form-control" id="cardUuid" name="cardUuid" th:value="*{cardUuid}" readonly>
+                <button class="btn btn-danger" type="submit">Delete Card</button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<script>
+    $("#album").select2({
+        theme: "bootstrap4",
+        ajax: {
+            url: '/search/album',
+            dataType: 'json',
+            delay: 200,
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        }
+    });
+
+    $('#album').on('select2:select', function (e) {
+    var data = e.params.data;
+    spotifyUri.value = data.uri;
+    spotifyArtist.value = data.artist[0].name;
+    console.log(data);
+    spotifyAlbum.value = data.text;
+    });
+</script>
+
+</body>
+</html>
