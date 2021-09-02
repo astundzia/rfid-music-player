@@ -11,6 +11,9 @@ What if we could recreate the "magic" of finding and playing albums through spot
 Further, I spent a lot of money on Sonos speakers throughout my house. Can I somehow integrate Sonos into this system?
 
 ## Solution
+
+![image](https://user-images.githubusercontent.com/831457/131880774-5799ecab-76b6-40af-9a62-d503a7218f83.png)
+
 I liked the idea of RFID cards as a physical way to represent an album. If youre not familiar, a RFID card is a small card that contains a chip. When you scan the card, it reports some unique identifier back.
 
 So I started there. I looked around the internet and saw there were a few folks doing something similar, but nothing quite fit my needs. Plus, I thought how much work could it be to read a card and tell the sonos API to play?
@@ -113,9 +116,6 @@ You can then hit "edit" on that record, and find the spotify album for this card
 
 Hit save, and that card is ready to play!
 
-
-
-
-
+![image](https://user-images.githubusercontent.com/831457/131880817-f2d234b3-7fc6-4b5e-ad38-3ee7d6fb117a.png)
 
 Thanks for reading!
