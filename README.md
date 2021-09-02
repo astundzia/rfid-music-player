@@ -15,3 +15,32 @@ I liked the idea of RFID cards as a physical way to represent an album. If youre
 
 So I started there. I looked around the internet and saw there were a few folks doing something similar, but nothing quite fit my needs. Plus, I thought how much work could it be to read a card and tell the sonos API to play?
 
+I knew I wanted:
+- a RFID based system, so I needed RFID cards and a RFID reader. I chose a cheap RFID reader, specifically this one: https://smile.amazon.com/gp/product/B07FCLY4S9, though you can find them much cheaper on ebay.
+- Some screen to display the album that's playing. I selected a HyperPixel Square (non-touch): https://smile.amazon.com/HyperPixel-4-0-Square-Raspberry-Non-Touch/dp/B08259FS1F
+- Integration with Sonos speakers within my house
+- Some enclosure to wrap it all up (luckily I have a Prusa mk3s)
+
+Luckily, I knew there were existing APIs for Sonos and spotify. After receiving the reader and screen, I decided to see what I could hack together in a weekend.
+
+I first attempted to use some open source linux tools, like rfdump, a few others, but to be honest they all kind of sucked. I had problems getting my cheap RFID scanner actually reading anything at all, and it was very hit or miss. Sometimes it'd scan, sometimes it wouldnt. Admittedly, I spent like 10 hours trying to get these tools working.
+
+Then I decided, you know, Java probably has some library for this. If I go with Java, I can leverage Spring Boot, and tap into Hibernate ORM for storage of the cards. Sure enough, the ability to scan RFID cards using my scanner just worked in Java. After some "hello world" level validation, I started hacking together a solution in spring boot.
+
+After about 8 hours, I had a RFID reading app, that had some real basic Bootstrap UI, that let me scan cards and link the card UUID to a spotify album UUID. Toss in some rules around volume, grouping, etc. And my 8 hour app has been running flawlessly for 6 months.
+
+I still had the problem of "how do I display album art on the screen?", luckily I read an article on hackaday that pointed me to: https://www.hackster.io/mark-hank/sonos-album-art-on-raspberry-pi-screen-5b0012
+
+And just like that, I could scan a RFID card, and have the album play throughout my house.
+
+## Install guide
+There is an assumption you are familiar with linux, java, node, etc. If you've never written a bash script, this guide is probably not for you.
+
+### Step 1. Install sonos-http-api & music-screen-api on your Raspberry Pi
+I'd recommend following this guide here: https://www.hackster.io/mark-hank/sonos-album-art-on-raspberry-pi-screen-5b0012
+
+After, you'll have the necessary sonos API running, along with the ability to display album art on your hyperpixel.
+
+### Step 2. Clone this repo and run the java app
+
+## Customization
