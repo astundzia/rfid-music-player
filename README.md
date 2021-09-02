@@ -42,5 +42,41 @@ I'd recommend following this guide here: https://www.hackster.io/mark-hank/sonos
 After, you'll have the necessary sonos API running, along with the ability to display album art on your hyperpixel.
 
 ### Step 2. Clone this repo and run the java app
+You can use maven to fetch the application dependencies, run something like `mvn clean install`
+After, you'll have a `target/` directory that contains the fat jar. You can then run `java -jar jukebox-0.0.1-SNAPSHOT.jar`.
 
 ## Customization
+You must provide a spotify clientID and clientSecret to the application. See https://developer.spotify.com/documentation/general/guides/authorization-guide/ on how to get this clientId/clientSecret
+
+Here is the available settings you can adjust. You can find this under `src/main/resources/application.yml`
+
+```
+server:
+  port : 8081
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/jukebox
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
+# You must provide a clientId and clientSecret
+spotify:
+  clientId: na
+  clientSecret: na
+
+sonos:
+# Define the speakers you want the album to play on
+  mainSpeaker: Office
+  speakerGroup: Alex's PC, Bedroom, Half Bathroom, Kitchen, Living Room, Master Bathroom
+  volume: 25
+  setVolume: true
+```
+
+
+## Using the application
